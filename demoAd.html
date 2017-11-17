@@ -9,20 +9,23 @@
 </head>
 <body>
     <div>
-        <h1>Bai Viet</h1>
+        <h1>Nội dung bài viết</h1>
         <p id="adContent">Công nghệ màn hình Retina HD được mô tả bởi Phil Schiller như sau: "Đây là màn hình tiên tiến nhất hiện nay được trang bị vào một chiếc điện thoại". iPhone 6 sẽ có điểm ảnh nhiều hơn 38% so với iPhone 5S, trong khi iPhone 6 Plus sẽ mang đến cho bạn sự ngạc nhiên lớn đến "không tưởng", 185% điểm ảnh.
 
 Cả hai chiếc iPhone 6 đều được tích hợp công nghệ "Dual domain pixels", cho phép góc nhìn của người dùng rộng mở và độ bão hòa màu sắc tốt hơn, kết hợp cùng dải màu: Full sRGB, độ sáng 500 cd/m2, trên màn hình còn có lớp phủ chống bán vân tay... Những yếu tố không thể thiếu được trên một chiếc smartphone cao cấp.</p>
     </div>
     <div>
-        <h1>Quang cao</h1>
+    <button onclick="myFunction()">Tải quảng cáo</button>
+    </div>
+    <div>
+        <h1>Quảng Cáo</h1>
         <p id="titleAd"></p>
         <div>
             <img src="" alt="" id="imgAd">
         </div>
-        
-        
-        <label for="">Price</label>
+
+
+        <label for=""></label>
         <p id="priceAd"></p>
     </div>
     <script>
@@ -37,9 +40,12 @@ Cả hai chiếc iPhone 6 đều được tích hợp công nghệ "Dual domain 
                 data: JSON.stringify(dataSend),
                 success: function(response){
                     console.log(response);
-                    $('#'+ imgElement).attr("src", response[1].image)
-                    $('#'+ titleElement).text(response[1].title)
-                    $('#' + priceElement).text(response[1].price)
+                    //console.log(response.length);
+                    var index = Math.floor((Math.random() * response.length));
+                    console.log(index);
+                    $('#'+ imgElement).attr("src", response[index].image)
+                    $('#'+ titleElement).text(response[index].title)
+                    $('#' + priceElement).text("Price: "+response[index].price)
                 },
                 error: function(err){
                     console.log("error:" + err)
@@ -47,11 +53,16 @@ Cả hai chiếc iPhone 6 đều được tích hợp công nghệ "Dual domain 
             });
         }
 
-        $(document).ready(function(){
-            var adContent = $('#adContent').text() 
+        function myFunction() {
+          var adContent = $('#adContent').text()
+          console.log(adContent)
+          getAds(adContent, "imgAd", "titleAd", "priceAd")
+        }
+        /*$(document).ready(function(){
+            var adContent = $('#adContent').text()
             console.log(adContent)
             getAds(adContent, "imgAd", "titleAd", "priceAd")
-        })
+        })*/
     </script>
 </body>
 </html>
